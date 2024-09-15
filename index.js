@@ -8,22 +8,32 @@ searchForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
     const searchTerm = searchBox.value.trim();
-
     if (searchTerm) {
         fetch(makeSearchUrl(searchTerm))
             .then(response => response.json())
             .then(data => {
-                content.innerHTML = `
-                <img src="${data.Poster}" alt="Movie Poster" class="movie-poster">
-                <div class="movie-info">
-                    <h2>${data.Title}</h2>
-                    <p>${data.Year}</p>
-                    <p>${data.Rated}</p>
-                    <p>${data.Genre}</p>
-                    <p>${data.Plot}</p>
-                </div>
-                `
-            })
+                content.style.justifyContent = 'flex-start'
+                content.innerHTML = ""
+                for (const movie of data.Search) {
+                    fetch(makeTitleUrl(movie.imdbID))
+                        .then(response => response.json())
+                        .then(detailData => {
+                            console.log(detailData);
+                            content.innerHTML += `
+                            <div class="movie-card">
+                                <img src="${detailData.Poster}" alt="Movie Poster" class="movie-poster">
+                                <div class="movie-info">
+                                    <h2>${detailData.Title}</h2>
+                                    <p>${detailData.Year}</p>
+                                    <p>${detailData.Rated}</p>
+                                    <p>${detailData.Genre}</p>
+                                    <p>${detailData.Plot}</p>
+                                </div>
+                            </div>
+                            `
+                        });
+                }
+            });
     } else {
         console.log('Please enter a search term');
     }
@@ -31,5 +41,9 @@ searchForm.addEventListener('submit', (event) => {
 
 
 function makeSearchUrl(searchTerm) {
-    return baseUrl + `?apikey=${apiKey}&t=${searchTerm}`
+    return baseUrl + `?apikey=${apiKey}&s=${searchTerm}`
+}
+
+function makeTitleUrl(imdbId) {
+    return baseUrl + `?apikey=${apiKey}&i=${imdbId}`
 }
