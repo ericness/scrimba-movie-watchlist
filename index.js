@@ -21,13 +21,20 @@ searchForm.addEventListener('submit', (event) => {
                             console.log(detailData);
                             content.innerHTML += `
                             <div class="movie-card">
-                                <img src="${detailData.Poster}" alt="Movie Poster" class="movie-poster">
+                                <div class="movie-poster-container">
+                                    <img src="${detailData.Poster}" alt="Movie Poster" class="movie-poster">
+                                </div>
                                 <div class="movie-info">
-                                    <h2>${detailData.Title}</h2>
-                                    <p>${detailData.Year}</p>
-                                    <p>${detailData.Rated}</p>
-                                    <p>${detailData.Genre}</p>
-                                    <p>${detailData.Plot}</p>
+                                    <div class="movie-title-container">
+                                        <h2 class="movie-title">${detailData.Title}</h2>
+                                        <p class="movie-rating">⭐ ${detailData.imdbRating}</p>
+                                    </div>
+                                    <div class="movie-details">
+                                        <div class="movie-runtime">${detailData.Runtime}</div> 
+                                        <div class="movie-genre">${detailData.Genre}</div>
+                                        <div class="add-to-watchlist">Add to Watchlist</div>
+                                    </div>
+                                    <div class="movie-plot">${detailData.Plot}</div>
                                 </div>
                             </div>
                             `
