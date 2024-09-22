@@ -123,7 +123,6 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: green; */
 }
 
 .movie-poster {
@@ -139,7 +138,6 @@ body, html {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-left: 0.5em;
 }
 
 .movie-title-container {
@@ -148,12 +146,10 @@ body, html {
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
-    /* background-color: blue; */
 }
 
 .movie-title {
     font-size: 1.6rem;
-    /* padding-left: 0.5em; */
     padding-bottom: 0;
 }
 
@@ -164,7 +160,6 @@ body, html {
 
 .movie-details {
     grid-area: details;
-    /* background-color: red; */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -179,8 +174,17 @@ body, html {
     padding: 0.5em 1.5em;
 }
 
-.movie-watchlist {
+.add-to-watchlist {
     padding: 0.5em 1.5em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.plus-sign {
+    width: 1.2em;
+    height: 1.2em;
+    padding-right: 0.5em;
 }
 
 .movie-plot {
@@ -188,5 +192,4 @@ body, html {
     color: #6B7280;
     padding: 0.5em 0;
     line-height: 1.5rem;
-    /* background-color: yellow; */
 }

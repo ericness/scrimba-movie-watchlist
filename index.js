@@ -32,7 +32,10 @@ searchForm.addEventListener('submit', (event) => {
                                     <div class="movie-details">
                                         <div class="movie-runtime">${detailData.Runtime}</div> 
                                         <div class="movie-genre">${detailData.Genre}</div>
-                                        <div class="add-to-watchlist">Add to Watchlist</div>
+                                        <div class="add-to-watchlist">
+                                        <img src="images/plus-sign.svg" alt="Add to Watchlist" class="plus-sign">
+                                        Add to Watchlist
+                                        </div>
                                     </div>
                                     <div class="movie-plot">${detailData.Plot}</div>
                                 </div>
