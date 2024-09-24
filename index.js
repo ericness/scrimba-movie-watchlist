@@ -4,6 +4,9 @@ const searchForm = document.getElementById('search-form')
 const searchBox = document.getElementById('searchbox')
 const content = document.getElementById('content')
 
+if (!sessionStorage.getItem('watchlist')) {
+    sessionStorage.setItem('watchlist', JSON.stringify([]));
+}
 searchForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
@@ -32,16 +35,19 @@ searchForm.addEventListener('submit', (event) => {
                                     <div class="movie-details">
                                         <div class="movie-runtime">${detailData.Runtime}</div> 
                                         <div class="movie-genre">${detailData.Genre}</div>
-                                        <div class="add-to-watchlist">
-                                        <img src="images/plus-sign.svg" alt="Add to Watchlist" class="plus-sign">
-                                        Add to Watchlist
+                                        <div class="add-to-watchlist" data-imdbid="${detailData.imdbID}">
+                                            <img src="images/plus-sign.svg" alt="Add to Watchlist" class="plus-sign">
+                                            Add to Watchlist
                                         </div>
                                     </div>
                                     <div class="movie-plot">${detailData.Plot}</div>
                                 </div>
                             </div>
                             `
-                        });
+                        })
+                        .then(() => {
+                            addWatchlistEventListeners();
+                        })
                 }
             });
     } else {
@@ -56,4 +62,26 @@ function makeSearchUrl(searchTerm) {
 
 function makeTitleUrl(imdbId) {
     return baseUrl + `?apikey=${apiKey}&i=${imdbId}`
+}
+
+function addWatchlistEventListeners() {
+    const watchlistButtons = document.querySelectorAll('.add-to-watchlist');
+    watchlistButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const imdbID = this.getAttribute('data-imdbid');
+            addToWatchlist(imdbID);
+        });
+    });
+}
+
+function addToWatchlist(imdbID) {
+    let watchlist = JSON.parse(sessionStorage.getItem('watchlist'));
+    if (!watchlist.includes(imdbID)) {
+        watchlist.push(imdbID);
+        sessionStorage.setItem('watchlist', JSON.stringify(watchlist));
+        console.log(`Added ${imdbID} to watchlist`);
+        // You can add visual feedback here, like changing the button text or style
+    } else {
+        console.log(`${imdbID} is already in the watchlist`);
+    }
 }
