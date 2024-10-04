@@ -37,6 +37,25 @@ body, html {
     font-weight: 600;
 }
 
+.watchlist a {
+    text-decoration: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    user-select: none;
+}
+
+.movie-search {
+    padding: 2em;
+    font-weight: 600;
+}
+
+.movie-search a {
+    text-decoration: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    user-select: none;
+}
+
 .search-section {
     flex: 0 0 auto;
     position: relative;
@@ -97,6 +116,22 @@ body, html {
 .film-icon {
     width: 8em;
     height: 8em;
+}
+
+.add-some-movies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background-color: red;
+}
+
+.add-some-movies a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    user-select: none;
 }
 
 .content-placeholder {
@@ -196,6 +231,13 @@ body, html {
     height: 1.2em;
     padding-right: 0.5em;
 }
+
+.big-plus-sign {
+    width: 2.5em;
+    height: 2.5em;
+    padding-right: 0.5em;
+}
+
 
 .movie-plot {
     grid-area: plot;
