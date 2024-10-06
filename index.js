@@ -15,39 +15,47 @@ searchForm.addEventListener('submit', (event) => {
         fetch(makeSearchUrl(searchTerm))
             .then(response => response.json())
             .then(data => {
-                content.style.justifyContent = 'flex-start'
-                content.innerHTML = ""
-                for (const movie of data.Search) {
-                    fetch(makeTitleUrl(movie.imdbID))
-                        .then(response => response.json())
-                        .then(detailData => {
-                            console.log(detailData);
-                            content.innerHTML += `
-                            <div class="movie-card">
-                                <div class="movie-poster-container">
-                                    <img src="${detailData.Poster}" alt="Movie Poster" class="movie-poster">
-                                </div>
-                                <div class="movie-info">
-                                    <div class="movie-title-container">
-                                        <h2 class="movie-title">${detailData.Title}</h2>
-                                        <p class="movie-rating">⭐ ${detailData.imdbRating}</p>
+                if (data.Response === 'False') {
+                    content.style.justifyContent = 'center'
+                    content.innerHTML = `
+                    <p class="no-results">Unable to find what you're looking for. Please try another search.</p>
+                    `
+                } else
+                {
+                    content.style.justifyContent = 'flex-start'
+                    content.innerHTML = ""
+                    for (const movie of data.Search) {
+                        fetch(makeTitleUrl(movie.imdbID))
+                            .then(response => response.json())
+                            .then(detailData => {
+                                console.log(detailData);
+                                content.innerHTML += `
+                                <div class="movie-card">
+                                    <div class="movie-poster-container">
+                                        <img src="${detailData.Poster}" alt="Movie Poster" class="movie-poster">
                                     </div>
-                                    <div class="movie-details">
-                                        <div class="movie-runtime">${detailData.Runtime}</div> 
-                                        <div class="movie-genre">${detailData.Genre}</div>
-                                        <div class="add-to-watchlist" data-imdbid="${detailData.imdbID}">
-                                            <img src="images/plus-sign.svg" alt="Add to Watchlist" class="plus-sign">
-                                            Add to Watchlist
+                                    <div class="movie-info">
+                                        <div class="movie-title-container">
+                                            <h2 class="movie-title">${detailData.Title}</h2>
+                                            <p class="movie-rating">⭐ ${detailData.imdbRating}</p>
                                         </div>
+                                        <div class="movie-details">
+                                            <div class="movie-runtime">${detailData.Runtime}</div> 
+                                            <div class="movie-genre">${detailData.Genre}</div>
+                                            <div class="add-to-watchlist" data-imdbid="${detailData.imdbID}">
+                                                <img src="images/plus-sign.svg" alt="Add to Watchlist" class="plus-sign">
+                                                Add to Watchlist
+                                            </div>
+                                        </div>
+                                        <div class="movie-plot">${detailData.Plot}</div>
                                     </div>
-                                    <div class="movie-plot">${detailData.Plot}</div>
                                 </div>
-                            </div>
-                            `
-                        })
-                        .then(() => {
-                            addWatchlistEventListeners();
-                        })
+                                `
+                            })
+                            .then(() => {
+                                addWatchlistEventListeners();
+                            })
+                    }
                 }
             });
     } else {

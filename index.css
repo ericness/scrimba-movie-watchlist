@@ -119,12 +119,8 @@ body, html {
 }
 
 .add-some-movies {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    background-color: red;
 }
 
 .add-some-movies a {
@@ -132,12 +128,22 @@ body, html {
     color: black;
     cursor: pointer;
     user-select: none;
+    display: flex;
+    align-items: center;
 }
 
 .content-placeholder {
     font-size: 2.5rem;
     color: #DFDDDD;
 }
+
+.no-results {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #DFDDDD;
+    width: 80%;
+}
+
 
 .movie-card {
     display: grid;
